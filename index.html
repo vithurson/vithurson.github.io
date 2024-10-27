@@ -1,13 +1,281 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Vithurson Subasharan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vithurson Subasharan - Computer Architect & Digital Designer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --light-bg: #f5f6fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .profile-info {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .profile-info a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        section:nth-child(even) {
+            background: var(--light-bg);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .experience-item, .project-item {
+            margin-bottom: 2rem;
+        }
+        
+        .experience-item h3, .project-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .experience-date {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        ul {
+            list-style-position: inside;
+            margin-left: 1rem;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .education-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Vithurson Subasharan</h1>
-  <p>Engineer II - RTL design at SiFive</p>
-  <p>Experienced Research And Development Engineer with a demonstrated history of working in the EDA industry. Computer Architecture, Universal Verification Methodology (UVM), FPGA prototyping, and System on a Chip (SoC). Strong engineering professional graduated from University of Moratuwa.</p>
-  <p>Connect with me on <a href="https://fr.linkedin.com/in/vithurson">LinkedIn</a></p>
+    <header>
+        <div class="container">
+            <h1>Vithurson Subasharan</h1>
+            <p>Computer Architect & Digital Designer</p>
+            <div class="profile-info">
+                <p>📍 Cambridge, United Kingdom</p>
+                <p>📧 <a href="mailto:Vithurson@gmail.com">Vithurson@gmail.com</a></p>
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>An accomplished computer architect and digital designer proficient in Synopsys EDA tools and microarchitecture for industrial processors. Extensive experience in decoding complex concepts through strong analytical abilities. Research focuses include high-performance computing, electronic design automation, embedded systems, and hardware acceleration.</p>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2>Work Experience</h2>
+            
+            <div class="experience-item">
+                <h3>RTL Development Engineer</h3>
+                <div class="experience-date">Feb 2022 – Present</div>
+                <p>SiFive</p>
+                <ul>
+                    <li>Implemented RISC-V Advanced Interrupt Architecture</li>
+                    <li>Contributed to SiFive's Error Architecture</li>
+                    <li>Acquired knowledge and hands-on experience in Functional Safety methods</li>
+                    <li>Gained hands-on experience in Area-efficient design</li>
+                    <li>Worked on clock gating of modules, enhancing power efficiency</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Research Engineer</h3>
+                <div class="experience-date">March 2020 – January 2022</div>
+                <p>School of Information Systems, Singapore Management University</p>
+                <ul>
+                    <li>Worked on projects related to collaborative sensing and low-power sensing</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Research and Development Engineer</h3>
+                <div class="experience-date">February 2018 – February 2020</div>
+                <p>Synopsys, Sri Lanka</p>
+                <ul>
+                    <li>Worked on HAWK project: FPGA acceleration of VCS simulation</li>
+                    <li>Contributed to RTL development and Verification</li>
+                    <li>Gained expertise in timing optimization and hardware architecture design</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Notable Projects</h2>
+            
+            <div class="project-item">
+                <h3>Simba - A RISC-V based 64-bit processor</h3>
+                <div class="experience-date">February 2018 – present</div>
+                <ul>
+                    <li>Application class processor architecture in Verilog, implementing RISC-V 64 (IMA) specification</li>
+                    <li>12-staged pipeline in-order, single-issue implementation</li>
+                    <li>Capable of running mainstream operating systems like Linux</li>
+                    <li>Operates at 100 MHz on a Zedboard FPGA</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <h3>RISC-V 32-bit processor implementation</h3>
+                <div class="experience-date">March 2017 – January 2018</div>
+                <ul>
+                    <li>Implements RISCV-32IM specification</li>
+                    <li>Written in Verilog and compatible for ASIC and FPGA</li>
+                    <li>Capable of running compiled bare-metal C programs</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Skills & Expertise</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li>Vivado</li>
+                        <li>VCS</li>
+                        <li>Verdi</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul>
+                        <li>Scala / Chisel</li>
+                        <li>Verilog / System Verilog</li>
+                        <li>VHDL</li>
+                        <li>Python</li>
+                        <li>C/C++</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Methodologies</h3>
+                    <ul>
+                        <li>Universal verification methodology</li>
+                        <li>System verilog test benches</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <ul>
+                        <li>English (Professional)</li>
+                        <li>Tamil (Native)</li>
+                        <li>Sinhala (Fluent)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            
+            <div class="education-item">
+                <h3>Bachelor of Science in Electronic and Telecommunication Engineering</h3>
+                <p>University of Moratuwa, Sri Lanka (2014 – 2018)</p>
+                <p>GPA: 3.56/4.2</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" style="background: var(--primary-color); color: white;">
+        <div class="container">
+            <h2 style="color: white;">Publications</h2>
+            <p>Jiyan WU, Vithurson SUBASHARAN, Tuan TRAN, Archan MISRA. MRIM: Enabling Mixed-Resolution Imaging for low-power pervasive vision tasks. IEEE International Conference on Pervasive Computing and Communications (PerCom).(2022)</p>
+        </div>
+    </section>
 </body>
 </html>
