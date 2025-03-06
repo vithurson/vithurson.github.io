@@ -3,279 +3,1555 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vithurson Subasharan - Computer Architect & Digital Designer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <title>Subasharan Vithurson - RISC-V Architect</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --text-color: #333;
-            --light-bg: #f5f6fa;
+            --primary-color: #0a192f;
+            --secondary-color: #64ffda;
+            --text-color: #ccd6f6;
+            --text-color-secondary: #8892b0;
+            --background-color: #0a192f;
+            --card-color: #112240;
+            --highlight-color: #64ffda;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            background-color: var(--background-color);
             color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
         header {
-            background: var(--primary-color);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .circuit-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
         }
         
-        .profile-info {
-            margin-top: 1rem;
-            font-size: 1.1rem;
+        .header-content {
+            max-width: 800px;
         }
         
-        .profile-info a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        section {
-            padding: 3rem 0;
-        }
-        
-        section:nth-child(even) {
-            background: var(--light-bg);
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        h2 {
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-        
-        .experience-item, .project-item {
-            margin-bottom: 2rem;
-        }
-        
-        .experience-item h3, .project-item h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .experience-date {
-            color: var(--secondary-color);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-        
-        ul {
-            list-style-position: inside;
-            margin-left: 1rem;
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-        
-        .skill-category h3 {
-            color: var(--primary-color);
+        .name-title {
+            font-size: 4rem;
             margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
         }
         
-        .education-item {
-            margin-bottom: 1.5rem;
+        .subtitle {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
         }
         
         .contact-info {
-            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-color-secondary);
+        }
+        
+        .contact-item svg {
+            margin-right: 0.5rem;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background-color: rgba(10, 25, 47, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+            padding: 1rem 10%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .section {
+            padding: 5rem 10%;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .card {
+            background-color: var(--card-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .card-subtitle {
+            font-size: 1rem;
+            color: var(--text-color-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .card.expanded .card-content {
+            max-height: 1000px;
+        }
+        
+        .card::after {
+            content: '+';
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .card.expanded::after {
+            transform: rotate(45deg);
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
             margin-top: 2rem;
         }
         
-        .contact-info a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
+        .skill-tag {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
         }
         
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
+        .skill-tag:hover {
+            background-color: rgba(100, 255, 218, 0.2);
+        }
+        
+        .roles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .role-card {
+            background-color: var(--card-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            border: 2px solid transparent;
+        }
+        
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .role-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .role-description {
+            color: var(--text-color-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .chip-diagram {
+            width: 100%;
+            height: 300px;
+            background-color: var(--card-color);
+            border-radius: 10px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .processor-stage {
+            position: absolute;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            background-color: rgba(100, 255, 218, 0.1);
+            border: 1px solid var(--secondary-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .processor-stage:hover {
+            background-color: rgba(100, 255, 218, 0.3);
+            z-index: 10;
+        }
+        
+        .processor-stage.active {
+            background-color: rgba(100, 255, 218, 0.4);
+            z-index: 10;
+        }
+        
+        .stage-info {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            background-color: var(--background-color);
+            padding: 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--secondary-color);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .stage-info.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--background-color);
+            border: 3px solid var(--secondary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+            background-color: var(--card-color);
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .timeline-content .date {
+            color: var(--text-color-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .name-title {
+                font-size: 3rem;
             }
             
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
+            .subtitle {
                 font-size: 1.5rem;
+            }
+            
+            .section {
+                padding: 4rem 5%;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 20px;
+            }
+            
+            .timeline-item:nth-child(even)::after {
+                left: 20px;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        .project-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background-color: #1d2d50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-image svg {
+            width: 60%;
+            height: auto;
+            opacity: 0.7;
+        }
+        
+        .project-details {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .project-description {
+            color: var(--text-color-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .project-tech-tag {
+            font-size: 0.8rem;
+            color: var(--text-color-secondary);
+        }
+        
+        footer {
+            padding: 2rem 10%;
+            text-align: center;
+            background-color: var(--card-color);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 25, 47, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-container.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal {
+            background-color: var(--card-color);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-container.active .modal {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: var(--text-color-secondary);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .modal-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .modal-content {
+            line-height: 1.8;
+        }
+        
+        .modal-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .modal-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-content ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* SVG animation styles */
+        .chip-ani {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            opacity: 0.1;
+        }
+        
+        .pulse {
+            stroke-width: 2px;
+            stroke: var(--secondary-color);
+            fill: none;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+        
+        .data-flow {
+            stroke-width: 2px;
+            stroke: var(--secondary-color);
+            fill: none;
+            stroke-dasharray: 10;
+            animation: flow 3s linear infinite;
+        }
+        
+        @keyframes flow {
+            0% {
+                stroke-dashoffset: 100;
+            }
+            100% {
+                stroke-dashoffset: 0;
             }
         }
     </style>
 </head>
 <body>
+    <nav id="navbar">
+        <div class="logo">VITHU</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#journey">Journey</a>
+            <a href="#roles">Roles</a>
+        </div>
+    </nav>
+    
     <header>
-        <div class="container">
-            <h1>Vithurson Subasharan</h1>
-            <p>Computer Architect & Digital Designer</p>
-            <div class="profile-info">
-                <p>📍 Cambridge, United Kingdom</p>
-                <p>📧 <a href="mailto:Vithurson@gmail.com">Vithurson@gmail.com</a></p>
+        <div class="circuit-bg">
+            <svg class="chip-ani" viewBox="0 0 100 100">
+                <rect x="20" y="20" width="60" height="60" rx="5" class="pulse" />
+                <rect x="30" y="30" width="40" height="40" rx="3" class="pulse" style="animation-delay: 1s" />
+                <line x1="0" y1="50" x2="20" y2="50" class="data-flow" />
+                <line x1="80" y1="50" x2="100" y2="50" class="data-flow" />
+                <line x1="50" y1="0" x2="50" y2="20" class="data-flow" />
+                <line x1="50" y1="80" x2="50" y2="100" class="data-flow" />
+            </svg>
+        </div>
+        <div class="header-content">
+            <h1 class="name-title">Subasharan Vithurson</h1>
+            <h2 class="subtitle">RISC-V Computer Architect & Digital Designer</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    Cambridge, UK
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                    </svg>
+                    Vithurson@gmail.com
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                    </svg>
+                    +44 7476249780
+                </div>
             </div>
+        </div>
+        <div class="scroll-down" id="scroll-down">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+            </svg>
         </div>
     </header>
-
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>An accomplished computer architect and digital designer proficient in Synopsys EDA tools and microarchitecture for industrial processors. Extensive experience in decoding complex concepts through strong analytical abilities. Research focuses include high-performance computing, electronic design automation, embedded systems, and hardware acceleration.</p>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <h2>Work Experience</h2>
-            
-            <div class="experience-item">
-                <h3>RTL Development Engineer</h3>
-                <div class="experience-date">Feb 2022 – Present</div>
-                <p>SiFive</p>
-                <ul>
-                    <li>Implemented RISC-V Advanced Interrupt Architecture</li>
-                    <li>Contributed to SiFive's Error Architecture</li>
-                    <li>Acquired knowledge and hands-on experience in Functional Safety methods</li>
-                    <li>Gained hands-on experience in Area-efficient design</li>
-                    <li>Worked on clock gating of modules, enhancing power efficiency</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Research Engineer</h3>
-                <div class="experience-date">March 2020 – January 2022</div>
-                <p>School of Information Systems, Singapore Management University</p>
-                <ul>
-                    <li>Worked on projects related to collaborative sensing and low-power sensing</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Research and Development Engineer</h3>
-                <div class="experience-date">February 2018 – February 2020</div>
-                <p>Synopsys, Sri Lanka</p>
-                <ul>
-                    <li>Worked on HAWK project: FPGA acceleration of VCS simulation</li>
-                    <li>Contributed to RTL development and Verification</li>
-                    <li>Gained expertise in timing optimization and hardware architecture design</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <div class="container">
-            <h2>Notable Projects</h2>
-            
-            <div class="project-item">
-                <h3>Simba - A RISC-V based 64-bit processor</h3>
-                <div class="experience-date">February 2018 – present</div>
-                <ul>
-                    <li>Application class processor architecture in Verilog, implementing RISC-V 64 (IMA) specification</li>
-                    <li>12-staged pipeline in-order, single-issue implementation</li>
-                    <li>Capable of running mainstream operating systems like Linux</li>
-                    <li>Operates at 100 MHz on a Zedboard FPGA</li>
-                </ul>
-            </div>
-
-            <div class="project-item">
-                <h3>RISC-V 32-bit processor implementation</h3>
-                <div class="experience-date">March 2017 – January 2018</div>
-                <ul>
-                    <li>Implements RISCV-32IM specification</li>
-                    <li>Written in Verilog and compatible for ASIC and FPGA</li>
-                    <li>Capable of running compiled bare-metal C programs</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
-            <h2>Skills & Expertise</h2>
-            
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Tools</h3>
-                    <ul>
-                        <li>Vivado</li>
-                        <li>VCS</li>
-                        <li>Verdi</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <ul>
-                        <li>Scala / Chisel</li>
-                        <li>Verilog / System Verilog</li>
-                        <li>VHDL</li>
-                        <li>Python</li>
-                        <li>C/C++</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Methodologies</h3>
-                    <ul>
-                        <li>Universal verification methodology</li>
-                        <li>System verilog test benches</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <ul>
-                        <li>English (Professional)</li>
-                        <li>Tamil (Native)</li>
-                        <li>Sinhala (Fluent)</li>
-                    </ul>
+    
+    <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <div class="card expanded">
+            <h3 class="card-title">Professional Summary</h3>
+            <div class="card-content">
+                <p>An accomplished computer architect and digital designer proficient in Synopsys EDA tools and microarchitecture for industrial processors. Extensive experience in decoding complex concepts through strong analytical abilities. Research focuses include high-performance computing, electronic design automation, embedded systems, and hardware acceleration.</p>
+                <p>My journey in processor design has taken me from implementing basic RISC-V instructions to building a complete computer system capable of browsing the internet. This progression represents more than technical achievement—it embodies a philosophy of understanding computing systems at every level, from transistors to applications.</p>
+                <div class="skills">
+                    <div class="skill-tag">RISC-V</div>
+                    <div class="skill-tag">RTL Design</div>
+                    <div class="skill-tag">Computer Architecture</div>
+                    <div class="skill-tag">Verilog</div>
+                    <div class="skill-tag">System Verilog</div>
+                    <div class="skill-tag">FPGA</div>
+                    <div class="skill-tag">Processor Design</div>
+                    <div class="skill-tag">Linux</div>
+                    <div class="skill-tag">System-on-Chip</div>
+                    <div class="skill-tag">Hardware Acceleration</div>
                 </div>
             </div>
         </div>
     </section>
-
-    <section id="education">
-        <div class="container">
-            <h2>Education</h2>
+    
+    <section id="processor-visualization" class="section">
+        <h2 class="section-title">RISC-V 12-Stage Pipeline</h2>
+        <div class="chip-diagram">
+            <div class="processor-stage" style="top: 30px; left: 20px;" data-stage="predictor">Branch Predictor</div>
+            <div class="processor-stage" style="top: 30px; left: 160px;" data-stage="itlb">ITLB</div>
+            <div class="processor-stage" style="top: 30px; left: 260px;" data-stage="if1">IF1</div>
+            <div class="processor-stage" style="top: 30px; left: 360px;" data-stage="id">ID</div>
+            <div class="processor-stage" style="top: 30px; left: 460px;" data-stage="fw">Forwarding</div>
             
-            <div class="education-item">
-                <h3>Bachelor of Science in Electronic and Telecommunication Engineering</h3>
-                <p>University of Moratuwa, Sri Lanka (2014 – 2018)</p>
-                <p>GPA: 3.56/4.2</p>
+            <div class="processor-stage" style="top: 100px; left: 20px;" data-stage="iex">IEX</div>
+            <div class="processor-stage" style="top: 100px; left: 160px;" data-stage="dtlb">DTLB</div>
+            <div class="processor-stage" style="top: 100px; left: 260px;" data-stage="dm1">DM1</div>
+            <div class="processor-stage" style="top: 100px; left: 360px;" data-stage="dm2">DM2</div>
+            <div class="processor-stage" style="top: 100px; left: 460px;" data-stage="wb">WB</div>
+            
+            <div class="processor-stage" style="top: 170px; left: 20px;" data-stage="cache">Cache System</div>
+            <div class="processor-stage" style="top: 170px; left: 190px;" data-stage="mmu">MMU</div>
+            <div class="processor-stage" style="top: 170px; left: 360px;" data-stage="control">Control Unit</div>
+            
+            <div class="stage-info" id="stage-info">
+                <h3>Select a pipeline stage to learn more</h3>
+                <p>Click on any component in the diagram above to see details about my 12-stage RISC-V pipeline implementation.</p>
+            </div>
+            
+            <svg viewBox="0 0 600 300" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                <!-- Top row connections -->
+                <path d="M100 45 L150 45" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                <path d="M200 45 L250 45" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                <path d="M300 45 L350 45" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                <path d="M400 45 L450 45" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                <path d="M510 45 L540 45 L540 115 L510 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                
+                <!-- Middle row connections -->
+                <path d="M80 115 L150 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                <path d="M200 115 L250 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                <path d="M300 115 L350 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                <path d="M400 115 L450 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
+                </path>
+                
+                <!-- Vertical connections -->
+                <path d="M50 60 L50 90" stroke="#64ffda" stroke-width="2" fill="none" />
+                <path d="M180 60 L180 90" stroke="#64ffda" stroke-width="2" fill="none" />
+                <path d="M280 60 L280 90" stroke="#64ffda" stroke-width="2" fill="none" />
+                <path d="M380 60 L380 90" stroke="#64ffda" stroke-width="2" fill="none" />
+                <path d="M480 60 L480 90" stroke="#64ffda" stroke-width="2" fill="none" />
+                
+                <!-- Bottom connections -->
+                <path d="M50 130 L50 160" stroke="#64ffda" stroke-width="2" fill="none" />
+                <path d="M180 130 L180 160" stroke="#64ffda" stroke-width="2" fill="none" />
+                <path d="M380 130 L380 160" stroke="#64ffda" stroke-width="2" fill="none" />
+                
+                <!-- Cache to TLBs -->
+                <path d="M80 170 L80 70 L150 70" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="3,3">
+                    <animate attributeName="stroke-dashoffset" from="6" to="0" dur="2s" repeatCount="indefinite" />
+                </path>
+                <path d="M100 170 L100 140 L150 140" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="3,3">
+                    <animate attributeName="stroke-dashoffset" from="6" to="0" dur="2s" repeatCount="indefinite" />
+                </path>
+                
+                <!-- Memory system feedback -->
+                <path d="M240 185 L320 185" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="3,3">
+                    <animate attributeName="stroke-dashoffset" from="6" to="0" dur="2s" repeatCount="indefinite" />
+                </path>
+            </svg>
+        </div>
+    </section>
+    
+    <section id="experience" class="section">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="card">
+            <h3 class="card-title">RTL Development Engineer</h3>
+            <h4 class="card-subtitle">SiFive (Feb 2022 – Present)</h4>
+            <div class="card-content">
+                <p>At SiFive, I've been deeply involved in the development of RISC-V processor cores, focusing on:</p>
+                <ul>
+                    <li>Implementing the RISC-V Advanced Interrupt Architecture, which involved designing complex interrupt handling logic that balances performance with deterministic behavior</li>
+                    <li>Contributing to SiFive's Error Architecture, improving error detection and handling mechanisms to enhance system reliability</li>
+                    <li>Applying Functional Safety methods to ensure processor designs meet requirements for safety-critical applications</li>
+                    <li>Optimizing designs for area efficiency, reducing silicon footprint while maintaining performance</li>
+                    <li>Enhancing power efficiency through strategic clock gating of modules, resulting in significant power savings</li>
+                </ul>
+                <p>This role has honed my skills in professional RTL development practices, timing optimization, and creating designs that strike the right balance between performance, power, and area (PPA).</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3 class="card-title">Research Engineer</h3>
+            <h4 class="card-subtitle">Singapore Management University (March 2020 – January 2022)</h4>
+            <div class="card-content">
+                <p>As a Research Engineer at SMU's School of Information Systems, I focused on:</p>
+                <ul>
+                    <li>Advancing collaborative sensing technologies that enable multiple sensors to work together efficiently</li>
+                    <li>Developing low-power sensing solutions to extend battery life in IoT applications</li>
+                    <li>Co-authoring a paper on Mixed-Resolution Imaging (MRIM) for low-power pervasive vision tasks</li>
+                </ul>
+                <p>This research experience broadened my perspective beyond traditional processor design to include edge computing and power-constrained systems, which has proven valuable in understanding the full spectrum of computing needs.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3 class="card-title">Research and Development Engineer</h3>
+            <h4 class="card-subtitle">Synopsys, Sri Lanka (February 2018 – February 2020)</h4>
+            <div class="card-content">
+                <p>At Synopsys, I worked on the HAWK project, which aimed to accelerate VCS simulation using FPGA technology:</p>
+                <ul>
+                    <li>Developed RTL for a custom-built vector processor designed specifically for simulation acceleration</li>
+                    <li>Conducted comprehensive verification to ensure correctness of the hardware acceleration</li>
+                    <li>Optimized timing to achieve maximum performance from the FPGA implementation</li>
+                    <li>Collaborated with a team of engineers to design a new hardware architecture that significantly improved simulation speed</li>
+                </ul>
+                <p>This experience at Synopsys was instrumental in developing my skills in both RTL development and verification, as well as providing insights into EDA tool development and optimization strategies.</p>
             </div>
         </div>
     </section>
-
-    <section id="publications" style="background: var(--primary-color); color: white;">
-        <div class="container">
-            <h2 style="color: white;">Publications</h2>
-            <p>Jiyan WU, Vithurson SUBASHARAN, Tuan TRAN, Archan MISRA. MRIM: Enabling Mixed-Resolution Imaging for low-power pervasive vision tasks. IEEE International Conference on Pervasive Computing and Communications (PerCom).(2022)</p>
+    
+    <section id="projects" class="section">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="project-showcase">
+            <div class="project-card" id="simba-project">
+                <div class="project-image">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="80" height="80" rx="5" fill="#1d2d50" stroke="#64ffda" stroke-width="2" />
+                        <text x="50" y="35" text-anchor="middle" fill="#64ffda" font-size="12">RISC-V</text>
+                        <text x="50" y="50" text-anchor="middle" fill="#64ffda" font-size="12">64-bit</text>
+                        <text x="50" y="65" text-anchor="middle" fill="#64ffda" font-size="12">CPU</text>
+                        <line x1="25" y1="75" x2="75" y2="75" stroke="#64ffda" stroke-width="2" stroke-dasharray="2,2">
+                            <animate attributeName="stroke-dashoffset" from="4" to="0" dur="1s" repeatCount="indefinite" />
+                        </line>
+                    </svg>
+                </div>
+                <div class="project-details">
+                    <h3 class="project-title">Simba RISC-V 64-bit Processor</h3>
+                    <p class="project-description">A full application-class processor implementing the RISC-V 64 (IMA) specification, capable of running Linux and supporting virtual memory.</p>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">Verilog • </span>
+                        <span class="project-tech-tag">FPGA • </span>
+                        <span class="project-tech-tag">Linux • </span>
+                        <span class="project-tech-tag">RISC-V • </span>
+                        <span class="project-tech-tag">Pipeline</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" id="riscv32-project">
+                <div class="project-image">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="20" width="60" height="60" rx="3" fill="#1d2d50" stroke="#64ffda" stroke-width="2" />
+                        <text x="50" y="45" text-anchor="middle" fill="#64ffda" font-size="10">RISC-V</text>
+                        <text x="50" y="60" text-anchor="middle" fill="#64ffda" font-size="10">32-bit</text>
+                        <circle cx="30" cy="30" r="3" fill="#64ffda">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="70" cy="30" r="3" fill="#64ffda">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+                        </circle>
+                    </svg>
+                </div>
+                <div class="project-details">
+                    <h3 class="project-title">RISC-V 32-bit Processor</h3>
+                    <p class="project-description">Final year project implementing the RISCV-32IM specification in Verilog, capable of running compiled bare-metal C programs.</p>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">Verilog • </span>
+                        <span class="project-tech-tag">FPGA • </span>
+                        <span class="project-tech-tag">RISC-V • </span>
+                        <span class="project-tech-tag">Bare Metal</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" id="imageproc-project">
+                <div class="project-image">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="20" width="60" height="60" fill="#1d2d50" stroke="#64ffda" stroke-width="1" />
+                        <rect x="30" y="30" width="40" height="40" fill="#1d2d50" stroke="#64ffda" stroke-width="1" opacity="0.8" />
+                        <rect x="40" y="40" width="20" height="20" fill="#1d2d50" stroke="#64ffda" stroke-width="1" opacity="0.6">
+                            <animate attributeName="width" values="20;10;20" dur="3s" repeatCount="indefinite" />
+                            <animate attributeName="height" values="20;10;20" dur="3s" repeatCount="indefinite" />
+                            <animate attributeName="x" values="40;45;40" dur="3s" repeatCount="indefinite" />
+                            <animate attributeName="y" values="40;45;40" dur="3s" repeatCount="indefinite" />
+                        </rect>
+                    </svg>
+                </div>
+                <div class="project-details">
+                    <h3 class="project-title">Custom Image Processing Processor</h3>
+                    <p class="project-description">Custom processor designed specifically for image down-sampling with a custom ISA, implemented on FPGA.</p>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">Verilog • </span>
+                        <span class="project-tech-tag">Image Processing • </span>
+                        <span class="project-tech-tag">Custom ISA</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card" id="iot-project">
+                <div class="project-image">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="30" fill="none" stroke="#64ffda" stroke-width="1">
+                            <animate attributeName="r" values="30;40;30" dur="3s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="50" cy="50" r="20" fill="none" stroke="#64ffda" stroke-width="1">
+                            <animate attributeName="r" values="20;25;20" dur="3s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.8;0.4;0.8" dur="3s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="50" cy="50" r="10" fill="none" stroke="#64ffda" stroke-width="1">
+                            <animate attributeName="r" values="10;15;10" dur="3s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.6;0.3;0.6" dur="3s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="50" cy="50" r="5" fill="#64ffda">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="1s" repeatCount="indefinite" />
+                        </circle>
+                    </svg>
+                </div>
+                <div class="project-details">
+                    <h3 class="project-title">Smart Cities IoT Project</h3>
+                    <p class="project-description">Research internship work on IoT for Smart Cities, involving sensor integration and long-range wireless communication.</p>
+                    <div class="project-tech">
+                        <span class="project-tech-tag">IoT • </span>
+                        <span class="project-tech-tag">LoRaWAN • </span>
+                        <span class="project-tech-tag">MQTT • </span>
+                        <span class="project-tech-tag">Raspberry Pi</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    
+    <section id="journey" class="section">
+        <h2 class="section-title">My Design Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>The Genesis</h3>
+                    <div class="date">2017</div>
+                    <p>Developed a Python emulator for RISC-V 32-bit IMA instruction set as the foundation for hardware implementation, creating a minimal C runtime environment with printf and scanf functionality.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Hardware Implementation</h3>
+                    <div class="date">2017-2018</div>
+                    <p>Moved to Verilog implementation with direct-mapped caches, 2-bit branch prediction, CSRs, and AXI4 memory-mapped I/O, testing on a Zedboard FPGA with Zynq system.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Simba Project Begins</h3>
+                    <div class="date">2018</div>
+                    <p>Started ambitious work on a 64-bit RISC-V processor capable of booting Linux, developing a C++ instruction-accurate emulator to identify minimal requirements.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Virtual Memory & Privilege Modes</h3>
+                    <div class="date">2018-2019</div>
+                    <p>Implemented virtual memory with dedicated pipeline stages for translation, built out Machine, Supervisor, and User privilege modes, and created a clock interrupt timer using the FPGA clock.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>First Linux Boot</h3>
+                    <div class="date">2019</div>
+                    <p>Successfully booted to a command-line Linux prompt at 40MHz with our 12-stage pipeline design, validating architectural decisions and implementation.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Performance Optimization</h3>
+                    <div class="date">2019-2020</div>
+                    <p>Identified timing bottlenecks and implemented optimizations: multi-cycle atomic instructions, pipelined cache operations, registered stall mechanism, and restructured forwarding logic—improving from 40MHz to 100MHz.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Complete System Integration</h3>
+                    <div class="date">2020</div>
+                    <p>Transformed the processor into a complete computer by integrating peripherals (SDHC, Ethernet, USB), adapting the PLIC for interrupt handling, and creating a display subsystem to enable GUI Linux.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Web Browsing Achievement</h3>
+                    <div class="date">2020</div>
+                    <p>The crowning achievement: A processor designed from scratch connected to the internet, accepted USB input, displayed a GUI, and successfully loaded web pages—a personal "moon landing" moment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="roles" class="section">
+        <h2 class="section-title">Professional Roles</h2>
+        <p style="margin-bottom: 2rem;">Click on a role to see how my experience makes me a strong candidate.</p>
+        <div class="roles-container">
+            <div class="role-card" data-role="rtl-designer">
+                <h3 class="role-title">RTL Designer</h3>
+                <p class="role-description">Hardware description language expert who implements digital circuit designs.</p>
+            </div>
+            
+            <div class="role-card" data-role="cpu-architect">
+                <h3 class="role-title">CPU Architect</h3>
+                <p class="role-description">Designs processor cores with focus on performance, power, and area optimization.</p>
+            </div>
+            
+            <div class="role-card" data-role="verification-engineer">
+                <h3 class="role-title">Verification Engineer</h3>
+                <p class="role-description">Ensures hardware designs function correctly through comprehensive testing.</p>
+            </div>
+            
+            <div class="role-card" data-role="firmware-engineer">
+                <h3 class="role-title">Firmware Engineer</h3>
+                <p class="role-description">Develops low-level software that interfaces directly with hardware.</p>
+            </div>
+            
+            <div class="role-card" data-role="soc-designer">
+                <h3 class="role-title">SoC Designer</h3>
+                <p class="role-description">Integrates various IP blocks to create complete system-on-chip solutions.</p>
+            </div>
+            
+            <div class="role-card" data-role="performance-engineer">
+                <h3 class="role-title">Performance Engineer</h3>
+                <p class="role-description">Optimizes designs to achieve maximum efficiency and throughput.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <p>Designed & Built by Subasharan Vithurson</p>
+            <p>© 2025</p>
+        </div>
+    </footer>
+    
+    <!-- Modal -->
+    <div class="modal-container" id="modal-container">
+        <div class="modal">
+            <div class="close-modal" id="close-modal">✕</div>
+            <h2 class="modal-title" id="modal-title">Title</h2>
+            <h3 class="modal-subtitle" id="modal-subtitle">Subtitle</h3>
+            <div class="modal-content" id="modal-content">
+                <p>Content will be loaded here dynamically.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll
+        document.getElementById('scroll-down').addEventListener('click', () => {
+            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Expandable cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('expanded');
+            });
+        });
+        
+        // Processor stage interaction
+        const stageInfo = document.getElementById('stage-info');
+        const stageInfoContent = {
+            predictor: {
+                title: "Branch Predictor",
+                content: "I implemented a 2-bit history branch predictor that significantly improved performance on branch-heavy code paths. The predictor maintains a pattern history table indexed by branch address and learns from execution history to predict branch directions. This speculative execution capability reduced pipeline stalls by approximately 60% on typical code, resulting in substantial performance improvements."
+            },
+            itlb: {
+                title: "Instruction TLB (ITLB)",
+                content: "The ITLB caches virtual-to-physical address translations specifically for instruction fetches. My implementation uses a fully associative TLB with 16 entries and includes a hardware page table walker that automatically loads translations from memory on misses. The ITLB supports RISC-V's Sv39 virtual memory format with 3-level page tables and includes permission checking for each access."
+            },
+            if1: {
+                title: "Instruction Fetch 1 (IF1)",
+                content: "The first instruction fetch stage calculates the next instruction address based on either PC+4 or branch predictor output. It issues memory requests to the instruction cache and handles speculative fetching based on prediction results. This stage also includes synchronization logic to handle pipeline flushes when branch mispredictions are detected later in the pipeline."
+            },
+            id: {
+                title: "Instruction Decode (ID)",
+                content: "The decode stage identifies instruction types (R/I/S/B/U/J), extracts immediate values, and determines register addresses. My implementation fully supports the RISC-V base ISA plus M and A extensions, with efficient decompression logic for the C extension (compressed instructions). This stage also includes register file access and initial hazard detection logic."
+            },
+            fw: {
+                title: "Forwarding Logic",
+                content: "This dedicated forwarding stage resolves data hazards by detecting dependencies and routing values from later pipeline stages back to execution units. I implemented a comprehensive forwarding network that can handle multiple simultaneous dependencies, reducing the need for pipeline stalls. This optimization was crucial for achieving high performance on sequential code with data dependencies."
+            },
+            iex: {
+                title: "Instruction Execute (IEX)",
+                content: "The execution stage contains the ALU, branch resolution logic, and forwarding paths. It implements all RISC-V integer operations (I extension), multiplication and division (M extension), and atomic operations (A extension). The ALU is pipelined for single-cycle operations, while multiplication and division are multi-cycle with appropriate stalling mechanisms. This stage also includes branch resolution logic that compares branch prediction with actual results."
+            },
+            dtlb: {
+                title: "Data TLB (DTLB)",
+                content: "Similar to the ITLB but dedicated to data accesses, the DTLB caches virtual-to-physical address translations for loads and stores. My implementation uses a 32-entry fully associative structure with LRU replacement policy. The DTLB includes permission checking for read/write accesses based on privilege level and coordinates with the memory management unit for page table walks on misses."
+            },
+            dm1: {
+                title: "Data Memory Access 1 (DM1)",
+                content: "The first memory access stage handles cache lookup and address calculation for load/store operations. For atomic operations like LR/SC (Load-Reserved/Store-Conditional), I developed special logic to handle the atomicity requirements. This stage initiates cache access and handles alignment checking for different data widths (byte, halfword, word, doubleword)."
+            },
+            dm2: {
+                title: "Data Memory Access 2 (DM2)",
+                content: "The second memory stage completes data cache access and handles memory exceptions. It manages data formatting for loads (sign/zero extension) and prepares data for the writeback stage. For stores, it updates the cache and initiates memory writes. This stage also handles memory barriers and cache flush operations required by the RISC-V memory consistency model."
+            },
+            wb: {
+                title: "Write Back (WB)",
+                content: "The write-back stage selects which data (ALU result, memory data, or PC+4 for jumps) should be written to the register file. My implementation includes dual write ports to handle corner cases like LR/SC instructions that need to update multiple registers in a single cycle. This stage also finalizes exception handling and updates control status registers (CSRs) when needed."
+            },
+            cache: {
+                title: "Cache System",
+                content: "The cache system consists of separate instruction and data caches. Both are direct-mapped with configurable sizes (typically 16KB each) and include parameterized line sizes and associativity. The caches implement the AXI4 protocol for memory transactions, allowing integration with various memory controllers. I also developed cache coherence mechanisms to handle instruction modifications (for fence.i instructions) and data updates that might affect cached instructions."
+            },
+            mmu: {
+                title: "Memory Management Unit (MMU)",
+                content: "The MMU handles address translation and memory protection. My implementation supports RISC-V's Sv39 virtual memory model with 512GB address space and includes a hardware page table walker. The MMU coordinates TLB refills, enforces memory permissions, and handles page faults. I also implemented support for memory-mapped I/O regions that bypass caching for device interactions."
+            },
+            control: {
+                title: "Control Unit",
+                content: "The control unit orchestrates the entire pipeline, generating control signals for each stage based on decoded instructions. I implemented complex stalling logic that handles TLB misses, cache misses, multi-cycle operations, and exceptions. The control unit also manages privilege modes and transitions, handling CSR accesses and coordinating with the MMU for address translation changes. It includes interrupt handling logic compatible with the RISC-V PLIC specification."
+            }
+        };
+        
+        document.querySelectorAll('.processor-stage').forEach(stage => {
+            stage.addEventListener('click', () => {
+                const stageType = stage.getAttribute('data-stage');
+                const info = stageInfoContent[stageType];
+                
+                document.querySelectorAll('.processor-stage').forEach(s => s.classList.remove('active'));
+                stage.classList.add('active');
+                
+                stageInfo.innerHTML = `<h3>${info.title}</h3><p>${info.content}</p>`;
+                stageInfo.classList.add('active');
+            });
+        });
+        
+        // Modal functionality
+        const modalContainer = document.getElementById('modal-container');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSubtitle = document.getElementById('modal-subtitle');
+        const modalContent = document.getElementById('modal-content');
+        const closeModal = document.getElementById('close-modal');
+        
+        closeModal.addEventListener('click', () => {
+            modalContainer.classList.remove('active');
+        });
+        
+        // Project cards modal content
+        const projectModals = {
+            "simba-project": {
+                title: "Simba RISC-V 64-bit Processor",
+                subtitle: "Independent Group Project (February 2018 – Present)",
+                content: `
+                    <p>The Simba project represents the pinnacle of my processor design experience—a complete 64-bit RISC-V processor capable of running mainstream operating systems like Linux.</p>
+                    
+                    <p>Starting with a C++ instruction-accurate emulator, we methodically identified the requirements for a Linux-capable processor. The implementation includes:</p>
+                    
+                    <ul>
+                        <li>A 12-stage pipeline with dedicated stages for instruction and data address translation</li>
+                        <li>Complete implementation of Machine, Supervisor, and User privilege modes</li>
+                        <li>Virtual memory support with hardware page table walker</li>
+                        <li>Advanced branch prediction and data forwarding</li>
+                        <li>Memory consistency handling with fence instructions</li>
+                        <li>Clock interrupt timer implemented using the FPGA clock</li>
+                        <li>AXI4 memory interfaces for cache and peripheral communication</li>
+                    </ul>
+                    
+                    <p>Through careful optimization, we improved the processor's frequency from 40MHz to 100MHz on a Zedboard FPGA. This required restructuring timing-critical paths, pipelining cache operations, implementing a registered stall mechanism, and optimizing forwarding logic.</p>
+                    
+                    <p>The processor was eventually expanded into a complete computer system by integrating peripherals:</p>
+                    
+                    <ul>
+                        <li>SDHC interface for storage</li>
+                        <li>Ethernet for networking</li>
+                        <li>USB for input devices</li>
+                        <li>HDMI display interface</li>
+                    </ul>
+                    
+                    <p>The crowning achievement was successfully running GUI Linux, connecting to the internet, and browsing the web—all on a processor designed from scratch.</p>
+                `
+            },
+            "riscv32-project": {
+                title: "RISC-V 32-bit Processor Implementation",
+                subtitle: "Final Year Project (March 2017 – January 2018)",
+                content: `
+                    <p>This project marked my first complete processor implementation, targeting the RISC-V 32-bit integer (I) and multiplication/division (M) extensions.</p>
+                    
+                    <p>I began by developing a Python emulator that served as both a learning tool and reference model for verification. The emulator included a minimal C runtime with printf and scanf functionality, allowing me to run and debug simple C programs before implementing the hardware.</p>
+                    
+                    <p>The hardware implementation in Verilog included:</p>
+                    
+                    <ul>
+                        <li>A 5-stage pipeline with hazard detection and forwarding</li>
+                        <li>Direct-mapped instruction and data caches</li>
+                        <li>AXI4 interface for memory access</li>
+                        <li>UART communication through memory-mapped I/O</li>
+                        <li>Control and Status Registers (CSRs) for basic system control</li>
+                    </ul>
+                    
+                    <p>The processor was successfully deployed on a Zedboard FPGA, where I developed a bootstrap mechanism that used the Zynq PS (Processing System) to load programs into memory before starting the RISC-V processor.</p>
+                    
+                    <p>This project provided deep understanding of the RISC-V instruction set architecture and established the foundation for more advanced work.</p>
+                `
+            },
+            "imageproc-project": {
+                title: "Custom Image Processing Processor",
+                subtitle: "Project for Semester Module (June 2017 – July 2017)",
+                content: `
+                    <p>This specialized processor was designed specifically for image down-sampling operations, demonstrating how domain-specific architectures can offer efficiency advantages over general-purpose processors.</p>
+                    
+                    <p>I defined a custom instruction set architecture (ISA) tailored for image processing operations, with specialized instructions for:</p>
+                    
+                    <ul>
+                        <li>Pixel loading and storing</li>
+                        <li>Averaging neighboring pixels</li>
+                        <li>Basic filtering operations</li>
+                        <li>Efficient memory access patterns for 2D data</li>
+                    </ul>
+                    
+                    <p>The processor implementation on FPGA demonstrated significant performance improvements for down-sampling operations compared to equivalent software running on general-purpose processors.</p>
+                    
+                    <p>This project highlighted the benefits of application-specific processor design and gave me experience in designing custom ISAs—skills that have proven valuable in my professional career when optimizing processors for specific workloads.</p>
+                `
+            },
+            "iot-project": {
+                title: "Smart Cities IoT Project",
+                subtitle: "Research Internship at Singapore University of Technology and Design (July 2016 – December 2016)",
+                content: `
+                    <p>During this research internship, I worked on IoT technologies for smart city applications, gaining valuable experience in the intersection of hardware and networked systems.</p>
+                    
+                    <p>My responsibilities included:</p>
+                    
+                    <ul>
+                        <li>Interfacing various sensors with embedded platforms</li>
+                        <li>Implementing long-range wireless communication using LoRaWAN</li>
+                        <li>Working with energy-harvesting EnOcean switches and sensors</li>
+                        <li>Setting up MQTT protocol for message passing between devices</li>
+                        <li>Configuring Raspberry Pi as IoT gateways to collect and process sensor data</li>
+                    </ul>
+                    
+                    <p>This experience provided important context for processor design in the IoT era, where energy efficiency and specialized communication capabilities are increasingly important considerations.</p>
+                    
+                    <p>The knowledge gained from this project has influenced my approach to processor design, particularly in considering power constraints and integration with communication protocols.</p>
+                `
+            }
+        };
+        
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.id;
+                const modalData = projectModals[projectId];
+                
+                modalTitle.textContent = modalData.title;
+                modalSubtitle.textContent = modalData.subtitle;
+                modalContent.innerHTML = modalData.content;
+                
+                modalContainer.classList.add('active');
+            });
+        });
+        
+        // Role cards modal content
+        const roleModals = {
+            "rtl-designer": {
+                title: "Vithu as an RTL Designer",
+                subtitle: "Hardware Description Language Expert",
+                content: `
+                    <p>My experience as an RTL designer spans both academic projects and professional roles, giving me a comprehensive understanding of the RTL development process from specification to implementation.</p>
+                    
+                    <p><strong>Relevant Experience:</strong></p>
+                    <ul>
+                        <li>At SiFive, I've implemented complex RTL for the RISC-V Advanced Interrupt Architecture, balancing performance with deterministic behavior</li>
+                        <li>Developed area-efficient designs and implemented clock gating for power optimization</li>
+                        <li>At Synopsys, contributed to the HAWK project through RTL development for FPGA acceleration</li>
+                        <li>Independently developed RTL for two complete RISC-V processors (32-bit and 64-bit)</li>
+                        <li>Created specialized hardware modules like caches, TLBs, MMUs, and bus interfaces</li>
+                    </ul>
+                    
+                    <p><strong>Technical Skills:</strong></p>
+                    <ul>
+                        <li>Proficient in Verilog and System Verilog</li>
+                        <li>Experience with VHDL for specific applications</li>
+                        <li>Familiar with Chisel/Scala for higher-level hardware description</li>
+                        <li>Strong understanding of synchronous design principles</li>
+                        <li>Expertise in timing optimization and critical path analysis</li>
+                    </ul>
+                    
+                    <p><strong>Design Methodology:</strong></p>
+                    <ul>
+                        <li>Begin with clear specifications and architectural planning</li>
+                        <li>Focus on clean, maintainable RTL with comprehensive documentation</li>
+                        <li>Implement parameterized designs for flexibility</li>
+                        <li>Prioritize timing closure from the beginning of the design process</li>
+                        <li>Design with verification in mind to facilitate testing</li>
+                    </ul>
+                    
+                    <p>My approach to RTL design is characterized by attention to detail, focus on timing optimization, and consideration of power and area constraints. I pride myself on delivering high-quality RTL that meets performance targets while remaining maintainable and adaptable to changing requirements.</p>
+                `
+            },
+            "cpu-architect": {
+                title: "Vithu as a CPU Architect",
+                subtitle: "Processor Design Specialist",
+                content: `
+                    <p>My journey in processor architecture began with academic projects and evolved into professional work designing RISC-V cores. I've gained deep experience in the complete processor design process, from microarchitecture specification to implementation and optimization.</p>
+                    
+                    <p><strong>Architectural Experience:</strong></p>
+                    <ul>
+                        <li>Designed and implemented a 12-stage pipeline RISC-V 64-bit processor capable of running Linux</li>
+                        <li>Created a 5-stage pipeline RISC-V 32-bit processor for embedded applications</li>
+                        <li>Implemented various microarchitectural features including branch prediction, data forwarding, and out-of-order execution</li>
+                        <li>Designed memory hierarchies with caches, TLBs, and memory management units</li>
+                        <li>At SiFive, contributed to commercial RISC-V core development</li>
+                    </ul>
+                    
+                    <p><strong>Performance Optimization:</strong></p>
+                    <ul>
+                        <li>Increased processor frequency from 40MHz to 100MHz through systematic timing optimization</li>
+                        <li>Implemented multi-cycle execution for complex instructions to improve timing</li>
+                        <li>Designed pipelined cache operations to break timing paths</li>
+                        <li>Created sophisticated stall mechanisms to improve throughput</li>
+                        <li>Optimized forwarding logic with dedicated paths for immediate data</li>
+                    </ul>
+                    
+                    <p><strong>System Integration:</strong></p>
+                    <ul>
+                        <li>Integrated processors with peripherals including Ethernet, USB, SDHC, and display interfaces</li>
+                        <li>Implemented interrupt controllers and memory-mapped I/O</li>
+                        <li>Modified Linux kernels to support custom processor implementations</li>
+                        <li>Created device drivers for peripheral integration</li>
+                    </ul>
+                    
+                    <p>As a CPU architect, I combine theoretical understanding with practical implementation experience. My approach balances performance requirements with power and area constraints, prioritizing solutions that can be efficiently implemented in hardware while meeting system-level objectives.</p>
+                `
+            },
+            "verification-engineer": {
+                title: "Vithu as a Verification Engineer",
+                subtitle: "Hardware Design Validator",
+                content: `
+                    <p>Throughout my processor design projects and professional roles, verification has been a critical aspect of my work. I've developed methodical approaches to ensure functional correctness while maintaining development efficiency.</p>
+                    
+                    <p><strong>Verification Methodology:</strong></p>
+                    <ul>
+                        <li>Developed instruction-accurate emulators in Python and C++ as reference models</li>
+                        <li>Created SystemVerilog testbenches for component-level and system-level verification</li>
+                        <li>Experience with Universal Verification Methodology (UVM)</li>
+                        <li>Implemented directed testing for critical functionality</li>
+                        <li>Developed constrained-random tests for comprehensive coverage</li>
+                    </ul>
+                    
+                    <p><strong>Debugging Techniques:</strong></p>
+                    <ul>
+                        <li>Proficient with Verdi and other debug tools</li>
+                        <li>Experienced in using Integrated Logic Analyzer (ILA) for FPGA debugging</li>
+                        <li>Developed custom logging and tracing mechanisms</li>
+                        <li>Implemented hardware performance counters for validation</li>
+                        <li>Created specialized test fixtures for complex scenarios</li>
+                    </ul>
+                    
+                    <p><strong>Coverage-Driven Verification:</strong></p>
+                    <ul>
+                        <li>Implemented functional coverage models for processor features</li>
+                        <li>Tracked code coverage to ensure complete testing</li>
+                        <li>Developed corner case tests based on coverage analysis</li>
+                        <li>Created verification plans with measurable objectives</li>
+                    </ul>
+                    
+                    <p>My verification approach focuses on creating robust, reusable testbench components and leveraging both directed and random testing to achieve comprehensive coverage. I believe in early integration of verification into the design process and continuous verification throughout development to catch issues before they become deeply embedded in the design.</p>
+                `
+            },
+            "firmware-engineer": {
+                title: "Vithu as a Firmware Engineer",
+                subtitle: "Hardware-Software Interface Expert",
+                content: `
+                    <p>My experience spans both hardware and software domains, giving me unique insights into firmware development. I've worked on various aspects of the hardware-software interface, from boot code to device drivers.</p>
+                    
+                    <p><strong>Firmware Development Experience:</strong></p>
+                    <ul>
+                        <li>Developed boot sequences for RISC-V processors</li>
+                        <li>Created minimal C runtime environments with printf/scanf functionality</li>
+                        <li>Modified Linux kernels to support custom processor implementations</li>
+                        <li>Implemented device drivers for peripherals including Ethernet, USB, and SDHC</li>
+                        <li>Configured device trees for hardware description to operating systems</li>
+                    </ul>
+                    
+                    <p><strong>Low-Level Programming Skills:</strong></p>
+                    <ul>
+                        <li>Proficient in C and assembly programming</li>
+                        <li>Experience with memory-mapped I/O and register manipulation</li>
+                        <li>Understanding of interrupt handling and exception processing</li>
+                        <li>Knowledge of concurrency issues in multi-core environments</li>
+                        <li>Familiarity with real-time constraints and optimization techniques</li>
+                    </ul>
+                    
+                    <p><strong>Hardware Understanding:</strong></p>
+                    <ul>
+                        <li>Deep knowledge of processor architecture from designing RISC-V cores</li>
+                        <li>Understanding of memory hierarchies and cache behavior</li>
+                        <li>Experience with peripheral interfaces and protocols</li>
+                        <li>Familiarity with timing constraints and hardware limitations</li>
+                    </ul>
+                    
+                    <p>My approach to firmware development combines an engineer's precision with a developer's practicality. I write firmware that efficiently interfaces with hardware while remaining maintainable and well-documented. My hardware design background gives me unique insight into optimizing firmware for specific processor architectures and peripheral interfaces.</p>
+                `
+            },
+            "soc-designer": {
+                title: "Vithu as an SoC Designer",
+                subtitle: "System Integrator and Architect",
+                content: `
+                    <p>My experience with complete system design, from processors to peripherals, has prepared me for SoC design roles. I've worked on integrating various components into cohesive systems that balance performance, power, and functionality.</p>
+                    
+                    <p><strong>System Integration Experience:</strong></p>
+                    <ul>
+                        <li>Transformed a standalone RISC-V processor into a complete computer system</li>
+                        <li>Integrated peripherals including Ethernet, USB, SDHC, and display interfaces</li>
+                        <li>Implemented a Platform-Level Interrupt Controller (PLIC) for system-wide interrupt management</li>
+                        <li>Created memory maps and address spaces for system components</li>
+                        <li>Designed bus architectures for component interconnection</li>
+                    </ul>
+                    
+                    <p><strong>Interface Expertise:</strong></p>
+                    <ul>
+                        <li>Implemented full AXI4 interfaces for memory and peripheral communication</li>
+                        <li>Experience with AMBA protocols and bus standards</li>
+                        <li>Designed memory-mapped I/O for device control</li>
+                        <li>Created custom interfaces for specialized components</li>
+                        <li>Implemented clock domain crossing mechanisms</li>
+                    </ul>
+                    
+                    <p><strong>System Architecture Skills:</strong></p>
+                    <ul>
+                        <li>Designed hierarchical memory systems with appropriate caching</li>
+                        <li>Created power domains and clock gating for energy efficiency</li>
+                        <li>Implemented boot sequences and initialization processes</li>
+                        <li>Balanced system resources for optimal performance</li>
+                        <li>Considered test access and debug capabilities in system design</li>
+                    </ul>
+                    
+                    <p>My approach to SoC design emphasizes clean interfaces between components, clear documentation of system architecture, and consideration of both hardware and software aspects. I focus on creating modular designs that can be verified incrementally and adapted to changing requirements.</p>
+                `
+            },
+            "performance-engineer": {
+                title: "Vithu as a Performance Engineer",
+                subtitle: "Optimization and Analysis Specialist",
+                content: `
+                    <p>Throughout my processor design projects, performance optimization has been a central focus. I've developed systematic approaches to identify bottlenecks and implement targeted improvements that maximize performance within constraints.</p>
+                    
+                    <p><strong>Performance Optimization Experience:</strong></p>
+                    <ul>
+                        <li>Increased processor frequency from 40MHz to 100MHz through systematic timing optimization</li>
+                        <li>Analyzed synthesized netlists to identify critical paths and bottlenecks</li>
+                        <li>Implemented architectural optimizations like multi-cycle execution for complex instructions</li>
+                        <li>Designed pipelined cache operations to break timing paths</li>
+                        <li>Created sophisticated stall mechanisms to improve throughput</li>
+                        <li>Optimized forwarding logic with dedicated paths for immediate data</li>
+                    </ul>
+                    
+                    <p><strong>Analysis Techniques:</strong></p>
+                    <ul>
+                        <li>Proficient with static timing analysis tools</li>
+                        <li>Experience with performance simulation and modeling</li>
+                        <li>Implemented hardware performance counters for runtime analysis</li>
+                        <li>Created benchmarking suites for consistent performance measurement</li>
+                        <li>Developed methodologies for isolating performance factors</li>
+                    </ul>
+                    
+                    <p><strong>Optimization Approach:</strong></p>
+                    <ul>
+                        <li>Identify the most critical bottlenecks through data-driven analysis</li>
+                        <li>Focus on high-impact optimizations that provide the greatest benefit</li>
+                        <li>Consider the tradeoffs between performance, power, and area</li>
+                        <li>Implement incremental improvements with continuous validation</li>
+                        <li>Document optimization decisions and their rationale</li>
+                    </ul>
+                    
+                    <p>My performance engineering philosophy combines rigorous analysis with creative problem-solving. I approach optimization as an iterative process, continuously measuring performance metrics and implementing targeted improvements based on data. This methodical approach has consistently yielded significant performance gains across my projects.</p>
+                `
+            }
+        };
+        
+        document.querySelectorAll('.role-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const roleId = card.getAttribute('data-role');
+                const modalData = roleModals[roleId];
+                
+                modalTitle.textContent = modalData.title;
+                modalSubtitle.textContent = modalData.subtitle;
+                modalContent.innerHTML = modalData.content;
+                
+                modalContainer.classList.add('active');
+            });
+        });
+        
+        // Close modal when clicking outside
+        modalContainer.addEventListener('click', (e) => {
+            if (e.target === modalContainer) {
+                modalContainer.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
