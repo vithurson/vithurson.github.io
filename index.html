@@ -274,56 +274,7 @@
             margin-bottom: 1rem;
         }
         
-        .chip-diagram {
-            width: 100%;
-            height: 300px;
-            background-color: var(--card-color);
-            border-radius: 10px;
-            margin: 3rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .processor-stage {
-            position: absolute;
-            padding: 0.5rem;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            background-color: rgba(100, 255, 218, 0.1);
-            border: 1px solid var(--secondary-color);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .processor-stage:hover {
-            background-color: rgba(100, 255, 218, 0.3);
-            z-index: 10;
-        }
-        
-        .processor-stage.active {
-            background-color: rgba(100, 255, 218, 0.4);
-            z-index: 10;
-        }
-        
-        .stage-info {
-            position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            right: 1rem;
-            background-color: var(--background-color);
-            padding: 1rem;
-            border-radius: 5px;
-            border: 1px solid var(--secondary-color);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .stage-info.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
         
         .timeline {
             position: relative;
@@ -730,89 +681,7 @@
         </div>
     </section>
     
-    <section id="processor-visualization" class="section">
-        <h2 class="section-title">RISC-V 12-Stage Pipeline</h2>
-        <div class="chip-diagram">
-            <div class="processor-stage" style="top: 30px; left: 20px;" data-stage="predictor">Branch Predictor</div>
-            <div class="processor-stage" style="top: 30px; left: 160px;" data-stage="itlb">ITLB</div>
-            <div class="processor-stage" style="top: 30px; left: 260px;" data-stage="if1">IF1</div>
-            <div class="processor-stage" style="top: 30px; left: 360px;" data-stage="id">ID</div>
-            <div class="processor-stage" style="top: 30px; left: 460px;" data-stage="fw">Forwarding</div>
-            
-            <div class="processor-stage" style="top: 100px; left: 20px;" data-stage="iex">IEX</div>
-            <div class="processor-stage" style="top: 100px; left: 160px;" data-stage="dtlb">DTLB</div>
-            <div class="processor-stage" style="top: 100px; left: 260px;" data-stage="dm1">DM1</div>
-            <div class="processor-stage" style="top: 100px; left: 360px;" data-stage="dm2">DM2</div>
-            <div class="processor-stage" style="top: 100px; left: 460px;" data-stage="wb">WB</div>
-            
-            <div class="processor-stage" style="top: 170px; left: 20px;" data-stage="cache">Cache System</div>
-            <div class="processor-stage" style="top: 170px; left: 190px;" data-stage="mmu">MMU</div>
-            <div class="processor-stage" style="top: 170px; left: 360px;" data-stage="control">Control Unit</div>
-            
-            <div class="stage-info" id="stage-info">
-                <h3>Select a pipeline stage to learn more</h3>
-                <p>Click on any component in the diagram above to see details about my 12-stage RISC-V pipeline implementation.</p>
-            </div>
-            
-            <svg viewBox="0 0 600 300" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-                <!-- Top row connections -->
-                <path d="M100 45 L150 45" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                <path d="M200 45 L250 45" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                <path d="M300 45 L350 45" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                <path d="M400 45 L450 45" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                <path d="M510 45 L540 45 L540 115 L510 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                
-                <!-- Middle row connections -->
-                <path d="M80 115 L150 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                <path d="M200 115 L250 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                <path d="M300 115 L350 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                <path d="M400 115 L450 115" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                    <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite" />
-                </path>
-                
-                <!-- Vertical connections -->
-                <path d="M50 60 L50 90" stroke="#64ffda" stroke-width="2" fill="none" />
-                <path d="M180 60 L180 90" stroke="#64ffda" stroke-width="2" fill="none" />
-                <path d="M280 60 L280 90" stroke="#64ffda" stroke-width="2" fill="none" />
-                <path d="M380 60 L380 90" stroke="#64ffda" stroke-width="2" fill="none" />
-                <path d="M480 60 L480 90" stroke="#64ffda" stroke-width="2" fill="none" />
-                
-                <!-- Bottom connections -->
-                <path d="M50 130 L50 160" stroke="#64ffda" stroke-width="2" fill="none" />
-                <path d="M180 130 L180 160" stroke="#64ffda" stroke-width="2" fill="none" />
-                <path d="M380 130 L380 160" stroke="#64ffda" stroke-width="2" fill="none" />
-                
-                <!-- Cache to TLBs -->
-                <path d="M80 170 L80 70 L150 70" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="3,3">
-                    <animate attributeName="stroke-dashoffset" from="6" to="0" dur="2s" repeatCount="indefinite" />
-                </path>
-                <path d="M100 170 L100 140 L150 140" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="3,3">
-                    <animate attributeName="stroke-dashoffset" from="6" to="0" dur="2s" repeatCount="indefinite" />
-                </path>
-                
-                <!-- Memory system feedback -->
-                <path d="M240 185 L320 185" stroke="#64ffda" stroke-width="2" fill="none" stroke-dasharray="3,3">
-                    <animate attributeName="stroke-dashoffset" from="6" to="0" dur="2s" repeatCount="indefinite" />
-                </path>
-            </svg>
-        </div>
-    </section>
+
     
     <section id="experience" class="section">
         <h2 class="section-title">Professional Experience</h2>
@@ -1121,75 +990,7 @@
             });
         });
         
-        // Processor stage interaction
-        const stageInfo = document.getElementById('stage-info');
-        const stageInfoContent = {
-            predictor: {
-                title: "Branch Predictor",
-                content: "I implemented a 2-bit history branch predictor that significantly improved performance on branch-heavy code paths. The predictor maintains a pattern history table indexed by branch address and learns from execution history to predict branch directions. This speculative execution capability reduced pipeline stalls by approximately 60% on typical code, resulting in substantial performance improvements."
-            },
-            itlb: {
-                title: "Instruction TLB (ITLB)",
-                content: "The ITLB caches virtual-to-physical address translations specifically for instruction fetches. My implementation uses a fully associative TLB with 16 entries and includes a hardware page table walker that automatically loads translations from memory on misses. The ITLB supports RISC-V's Sv39 virtual memory format with 3-level page tables and includes permission checking for each access."
-            },
-            if1: {
-                title: "Instruction Fetch 1 (IF1)",
-                content: "The first instruction fetch stage calculates the next instruction address based on either PC+4 or branch predictor output. It issues memory requests to the instruction cache and handles speculative fetching based on prediction results. This stage also includes synchronization logic to handle pipeline flushes when branch mispredictions are detected later in the pipeline."
-            },
-            id: {
-                title: "Instruction Decode (ID)",
-                content: "The decode stage identifies instruction types (R/I/S/B/U/J), extracts immediate values, and determines register addresses. My implementation fully supports the RISC-V base ISA plus M and A extensions, with efficient decompression logic for the C extension (compressed instructions). This stage also includes register file access and initial hazard detection logic."
-            },
-            fw: {
-                title: "Forwarding Logic",
-                content: "This dedicated forwarding stage resolves data hazards by detecting dependencies and routing values from later pipeline stages back to execution units. I implemented a comprehensive forwarding network that can handle multiple simultaneous dependencies, reducing the need for pipeline stalls. This optimization was crucial for achieving high performance on sequential code with data dependencies."
-            },
-            iex: {
-                title: "Instruction Execute (IEX)",
-                content: "The execution stage contains the ALU, branch resolution logic, and forwarding paths. It implements all RISC-V integer operations (I extension), multiplication and division (M extension), and atomic operations (A extension). The ALU is pipelined for single-cycle operations, while multiplication and division are multi-cycle with appropriate stalling mechanisms. This stage also includes branch resolution logic that compares branch prediction with actual results."
-            },
-            dtlb: {
-                title: "Data TLB (DTLB)",
-                content: "Similar to the ITLB but dedicated to data accesses, the DTLB caches virtual-to-physical address translations for loads and stores. My implementation uses a 32-entry fully associative structure with LRU replacement policy. The DTLB includes permission checking for read/write accesses based on privilege level and coordinates with the memory management unit for page table walks on misses."
-            },
-            dm1: {
-                title: "Data Memory Access 1 (DM1)",
-                content: "The first memory access stage handles cache lookup and address calculation for load/store operations. For atomic operations like LR/SC (Load-Reserved/Store-Conditional), I developed special logic to handle the atomicity requirements. This stage initiates cache access and handles alignment checking for different data widths (byte, halfword, word, doubleword)."
-            },
-            dm2: {
-                title: "Data Memory Access 2 (DM2)",
-                content: "The second memory stage completes data cache access and handles memory exceptions. It manages data formatting for loads (sign/zero extension) and prepares data for the writeback stage. For stores, it updates the cache and initiates memory writes. This stage also handles memory barriers and cache flush operations required by the RISC-V memory consistency model."
-            },
-            wb: {
-                title: "Write Back (WB)",
-                content: "The write-back stage selects which data (ALU result, memory data, or PC+4 for jumps) should be written to the register file. My implementation includes dual write ports to handle corner cases like LR/SC instructions that need to update multiple registers in a single cycle. This stage also finalizes exception handling and updates control status registers (CSRs) when needed."
-            },
-            cache: {
-                title: "Cache System",
-                content: "The cache system consists of separate instruction and data caches. Both are direct-mapped with configurable sizes (typically 16KB each) and include parameterized line sizes and associativity. The caches implement the AXI4 protocol for memory transactions, allowing integration with various memory controllers. I also developed cache coherence mechanisms to handle instruction modifications (for fence.i instructions) and data updates that might affect cached instructions."
-            },
-            mmu: {
-                title: "Memory Management Unit (MMU)",
-                content: "The MMU handles address translation and memory protection. My implementation supports RISC-V's Sv39 virtual memory model with 512GB address space and includes a hardware page table walker. The MMU coordinates TLB refills, enforces memory permissions, and handles page faults. I also implemented support for memory-mapped I/O regions that bypass caching for device interactions."
-            },
-            control: {
-                title: "Control Unit",
-                content: "The control unit orchestrates the entire pipeline, generating control signals for each stage based on decoded instructions. I implemented complex stalling logic that handles TLB misses, cache misses, multi-cycle operations, and exceptions. The control unit also manages privilege modes and transitions, handling CSR accesses and coordinating with the MMU for address translation changes. It includes interrupt handling logic compatible with the RISC-V PLIC specification."
-            }
-        };
-        
-        document.querySelectorAll('.processor-stage').forEach(stage => {
-            stage.addEventListener('click', () => {
-                const stageType = stage.getAttribute('data-stage');
-                const info = stageInfoContent[stageType];
-                
-                document.querySelectorAll('.processor-stage').forEach(s => s.classList.remove('active'));
-                stage.classList.add('active');
-                
-                stageInfo.innerHTML = `<h3>${info.title}</h3><p>${info.content}</p>`;
-                stageInfo.classList.add('active');
-            });
-        });
+
         
         // Modal functionality
         const modalContainer = document.getElementById('modal-container');
