@@ -884,7 +884,7 @@
                 <div class="timeline-content">
                     <h3>First Linux Boot</h3>
                     <div class="date">2019</div>
-                    <p>Successfully booted to a command-line Linux prompt at 40MHz with our 12-stage pipeline design, validating architectural decisions and implementation. This required extensive kernel modifications, including customizing the RISC-V port for our specific interrupt handling architecture and memory model.</p>
+                    <p>Successfully booted to a command-line Linux prompt at 40MHz with our 12-stage pipeline design, validating architectural decisions and implementation. This involved making the RISC-V Linux port work with Zynq 7000 peripherals.</p>
                 </div>
             </div>
             
@@ -900,7 +900,7 @@
                 <div class="timeline-content">
                     <h3>Complete System Integration</h3>
                     <div class="date">2020</div>
-                    <p>Transformed the processor into a complete computer by integrating peripherals (SDHC, Ethernet, USB), adapting the PLIC for interrupt handling, and creating a display subsystem to enable GUI Linux. The key software achievement was modifying ARM-specific Zynq 7000 drivers to work with our RISC-V processor, effectively creating a hybrid system that used Zynq peripherals with a RISC-V core.</p>
+                    <p>Transformed the processor into a complete computer by integrating Zynq 7000 peripherals (SDHC, Ethernet, USB) with our RISC-V core. The key achievement was making the ARM-specific drivers work with RISC-V ISA, creating a hybrid system that combined Zynq peripherals with a RISC-V processor.</p>
                 </div>
             </div>
             
@@ -1036,7 +1036,7 @@
                         <li>HDMI display interface</li>
                     </ul>
                     
-                    <p>The crowning achievement was successfully running GUI Linux, connecting to the internet, and browsing the web—all on a processor designed from scratch. This required significant Linux kernel modifications, including: porting Zynq 7000 ARM drivers to work with RISC-V, adapting the RISC-V Linux port to our specific implementation, implementing efficient context switching mechanisms, and optimizing memory management for our custom MMU. The challenge wasn't creating new drivers from scratch, but rather making existing ARM-based drivers work with our RISC-V architecture while running on Zynq 7000 SoC hardware.</p>
+                    <p>The crowning achievement was successfully running GUI Linux, connecting to the internet, and browsing the web—all on a processor designed from scratch. The key software contribution was porting ARM Zynq 7000 drivers to be compatible with RISC-V ISA, enabling us to use the Zynq peripherals with our RISC-V processor core.</p>
                 `
             },
             "riscv32-project": {
