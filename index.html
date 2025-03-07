@@ -665,7 +665,7 @@
             <div class="card-content">
                 <p>An accomplished computer architect and digital designer proficient in Synopsys EDA tools and microarchitecture for industrial processors. Extensive experience in decoding complex concepts through strong analytical abilities. Research focuses include high-performance computing, electronic design automation, embedded systems, and hardware acceleration.</p>
                 <p>My journey in processor design has taken me from implementing basic RISC-V instructions to building a complete computer system capable of browsing the internet. This progression represents more than technical achievement—it embodies a philosophy of understanding computing systems at every level, from transistors to applications.</p>
-                <div class="skills">
+                                    <div class="skills">
                     <div class="skill-tag">RISC-V</div>
                     <div class="skill-tag">RTL Design</div>
                     <div class="skill-tag">Computer Architecture</div>
@@ -673,8 +673,10 @@
                     <div class="skill-tag">System Verilog</div>
                     <div class="skill-tag">FPGA</div>
                     <div class="skill-tag">Processor Design</div>
-                    <div class="skill-tag">Linux</div>
+                    <div class="skill-tag">Linux Kernel</div>
+                    <div class="skill-tag">Driver Porting</div>
                     <div class="skill-tag">System-on-Chip</div>
+                    <div class="skill-tag">Zynq SoC</div>
                     <div class="skill-tag">Hardware Acceleration</div>
                 </div>
             </div>
@@ -882,7 +884,7 @@
                 <div class="timeline-content">
                     <h3>First Linux Boot</h3>
                     <div class="date">2019</div>
-                    <p>Successfully booted to a command-line Linux prompt at 40MHz with our 12-stage pipeline design, validating architectural decisions and implementation.</p>
+                    <p>Successfully booted to a command-line Linux prompt at 40MHz with our 12-stage pipeline design, validating architectural decisions and implementation. This required extensive kernel modifications, including customizing the RISC-V port for our specific interrupt handling architecture and memory model.</p>
                 </div>
             </div>
             
@@ -898,7 +900,7 @@
                 <div class="timeline-content">
                     <h3>Complete System Integration</h3>
                     <div class="date">2020</div>
-                    <p>Transformed the processor into a complete computer by integrating peripherals (SDHC, Ethernet, USB), adapting the PLIC for interrupt handling, and creating a display subsystem to enable GUI Linux.</p>
+                    <p>Transformed the processor into a complete computer by integrating peripherals (SDHC, Ethernet, USB), adapting the PLIC for interrupt handling, and creating a display subsystem to enable GUI Linux. The key software achievement was modifying ARM-specific Zynq 7000 drivers to work with our RISC-V processor, effectively creating a hybrid system that used Zynq peripherals with a RISC-V core.</p>
                 </div>
             </div>
             
@@ -1023,7 +1025,7 @@
                         <li>AXI4 memory interfaces for cache and peripheral communication</li>
                     </ul>
                     
-                    <p>Through careful optimization, we improved the processor's frequency from 40MHz to 100MHz on a Zedboard FPGA. This required restructuring timing-critical paths, pipelining cache operations, implementing a registered stall mechanism, and optimizing forwarding logic.</p>
+                    <p>Through careful optimization, we improved the processor's frequency from 40MHz to 100MHz on a Zedboard FPGA. This required restructuring timing-critical paths, pipelining cache operations, implementing a registered stall mechanism, and optimizing forwarding logic. The most challenging aspect was adapting the Linux kernel to work with our custom processor architecture.</p>
                     
                     <p>The processor was eventually expanded into a complete computer system by integrating peripherals:</p>
                     
@@ -1034,7 +1036,7 @@
                         <li>HDMI display interface</li>
                     </ul>
                     
-                    <p>The crowning achievement was successfully running GUI Linux, connecting to the internet, and browsing the web—all on a processor designed from scratch.</p>
+                    <p>The crowning achievement was successfully running GUI Linux, connecting to the internet, and browsing the web—all on a processor designed from scratch. This required significant Linux kernel modifications, including: porting Zynq 7000 ARM drivers to work with RISC-V, adapting the RISC-V Linux port to our specific implementation, implementing efficient context switching mechanisms, and optimizing memory management for our custom MMU. The challenge wasn't creating new drivers from scratch, but rather making existing ARM-based drivers work with our RISC-V architecture while running on Zynq 7000 SoC hardware.</p>
                 `
             },
             "riscv32-project": {
@@ -1057,7 +1059,7 @@
                     
                     <p>The processor was successfully deployed on a Zedboard FPGA, where I developed a bootstrap mechanism that used the Zynq PS (Processing System) to load programs into memory before starting the RISC-V processor.</p>
                     
-                    <p>This project provided deep understanding of the RISC-V instruction set architecture and established the foundation for more advanced work.</p>
+                    <p>This project provided deep understanding of the RISC-V instruction set architecture and established the foundation for more advanced work, particularly my later efforts in Linux kernel integration with custom hardware.</p>
                 `
             },
             "imageproc-project": {
@@ -1164,7 +1166,7 @@
                     <ul>
                         <li>Designed and implemented a 12-stage pipeline RISC-V 64-bit processor capable of running Linux</li>
                         <li>Created a 5-stage pipeline RISC-V 32-bit processor for embedded applications</li>
-                        <li>Implemented various microarchitectural features including branch prediction, data forwarding, and out-of-order execution</li>
+                        <li>Implemented various microarchitectural features including branch prediction, data forwarding, and pipelined execution</li>
                         <li>Designed memory hierarchies with caches, TLBs, and memory management units</li>
                         <li>At SiFive, contributed to commercial RISC-V core development</li>
                     </ul>
@@ -1182,7 +1184,7 @@
                     <ul>
                         <li>Integrated processors with peripherals including Ethernet, USB, SDHC, and display interfaces</li>
                         <li>Implemented interrupt controllers and memory-mapped I/O</li>
-                        <li>Modified Linux kernels to support custom processor implementations</li>
+                        <li>Extensively modified Linux kernels to support custom processor implementations, including adapting the trap handling, memory management, and device drivers</li>
                         <li>Created device drivers for peripheral integration</li>
                     </ul>
                     
@@ -1235,7 +1237,7 @@
                         <li>Developed boot sequences for RISC-V processors</li>
                         <li>Created minimal C runtime environments with printf/scanf functionality</li>
                         <li>Modified Linux kernels to support custom processor implementations</li>
-                        <li>Implemented device drivers for peripherals including Ethernet, USB, and SDHC</li>
+                        <li>Integrated Ethernet, USB, and SDHC peripherals by porting their ARM-specific drivers to work with RISC-V</li>
                         <li>Configured device trees for hardware description to operating systems</li>
                     </ul>
                     
